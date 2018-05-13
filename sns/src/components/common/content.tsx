@@ -10,7 +10,7 @@ import avata_4 from '../styles/image/avata_3.jpg';
 import avata_5 from '../styles/image/avata_5.jpg';
 
 export default class Content extends React.Component<any, any> {
-
+    // init state with constructor
     constructor(props: any) {
         super(props);
         this.state = {
@@ -21,16 +21,18 @@ export default class Content extends React.Component<any, any> {
         this.handleChange = this.handleChange.bind(this);
         this.hiddenPostForm = this.hiddenPostForm.bind(this);
     }
+    // show textarea post form
     public handleChange(): void {
         this.setState({ postInput: <textarea className="form-control" placeholder="What are you doing?" />, css: '.action-form-post{visibility: visible;}' });
     }
-
+    // hidden post texarea and show active post
     public hiddenPostForm(): void {
         this.setState({ postInput: <input type="text" className="form-control" placeholder="What are you doing?" />, css: '.action-form-post{visibility: hidden;}', activePost: '.post-insert{visibility: visible;}' });
     }
     public render() {
         return (
             <div className="main-content">
+            {/* left content */}
                 <div className="col-md-3">
                     <div className="row">
                         <div className="col-md-20">
@@ -83,7 +85,9 @@ export default class Content extends React.Component<any, any> {
                         </div>
                     </div>
                 </div>
+                {/* main content show user of post */}
                 <div className="col-md-6">
+                {/* form post */}
                     <div className="form-post">
                         <div className="post-left">
                             <img className="avata-image" src={avata_1} alt="user avata" />
@@ -103,6 +107,7 @@ export default class Content extends React.Component<any, any> {
                             </div>
                         </div>
                     </div>
+                    {/* all post show in here */}
                     <div className="timeline">
                         {/* post 1 */}
                         <div className="post" >
