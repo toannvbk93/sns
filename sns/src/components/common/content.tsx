@@ -9,12 +9,50 @@ import avata_3 from '../styles/image/avata_2.jpg';
 import avata_4 from '../styles/image/avata_3.jpg';
 import avata_5 from '../styles/image/avata_5.jpg';
 
+interface Props {
+    postContent: string;
+    updateField: (name: string, value: any) => void;
+    getPost: () => void;
+}
+
+export const formPost = (props: Props) =>
+    <input
+        type="text"
+        className="form-control"
+        placeholder="What are you doing?"
+    />
+
+export let postInput = () =>
+    <div className="post-insert" >
+        <div className="user-image col-md-1">
+            <img src={avata_1} alt="toannv" className="user-avata" />
+        </div>
+        <div className="post-content col-md-10">
+            <div className="username">
+                <h5><a href="toannv">ToanNV</a></h5>
+            </div>
+            <div className="post-content">
+                <p>aaa</p>
+            </div>
+            <div className="post-info">
+                <div className="col-md-2">
+                    <a href="like">like</a>
+                </div>
+                <div className="col-md-2">
+                    <a href="coment">comment</a>
+                </div>
+                <div className="col-md-2">
+                    <a href="share">share</a>
+                </div>
+            </div>
+        </div>
+    </div>
 export default class Content extends React.Component<any, any> {
     // init state with constructor
-    constructor(props: any) {
+    constructor(props: Props) {
         super(props);
         this.state = {
-            postInput: <input type="text" className="form-control" placeholder="What are you doing?" />,
+            postInput: formPost(props),
             css: '.action-form-post{visibility: hidden;}',
             activePost: '.post-insert{visibility: hidden;}'
         };
@@ -23,16 +61,16 @@ export default class Content extends React.Component<any, any> {
     }
     // show textarea post form
     public handleChange(): void {
-        this.setState({ postInput: <textarea className="form-control" placeholder="What are you doing?" />, css: '.action-form-post{visibility: visible;}' });
+        this.setState({ css: '.action-form-post{visibility: visible;}' });
     }
     // hidden post texarea and show active post
     public hiddenPostForm(): void {
-        this.setState({ postInput: <input type="text" className="form-control" placeholder="What are you doing?" />, css: '.action-form-post{visibility: hidden;}', activePost: '.post-insert{visibility: visible;}' });
+        this.setState({ css: '.action-form-post{visibility: hidden;}', activePost: '.post-insert{visibility: visible;}' });
     }
     public render() {
         return (
             <div className="main-content">
-            {/* left content */}
+                {/* left content */}
                 <div className="col-md-3">
                     <div className="row">
                         <div className="col-md-20">
@@ -87,7 +125,7 @@ export default class Content extends React.Component<any, any> {
                 </div>
                 {/* main content show user of post */}
                 <div className="col-md-6">
-                {/* form post */}
+                    {/* form post */}
                     <div className="form-post">
                         <div className="post-left">
                             <img className="avata-image" src={avata_1} alt="user avata" />
@@ -109,6 +147,9 @@ export default class Content extends React.Component<any, any> {
                     </div>
                     {/* all post show in here */}
                     <div className="timeline">
+                        {/* post input */}
+                        <style>{this.state.activePost}</style>
+                        {postInput()}
                         {/* post 1 */}
                         <div className="post" >
                             <div className="user-image col-md-1">
@@ -190,32 +231,7 @@ export default class Content extends React.Component<any, any> {
                                 </div>
                             </div>
                         </div>
-                        {/* post input */}
-                        <div className="post-insert" >
-                            <style>{this.state.activePost}</style>
-                            <div className="user-image col-md-1">
-                                <img src={avata_1} alt="toannv" className="user-avata" />
-                            </div>
-                            <div className="post-content col-md-10">
-                                <div className="username">
-                                    <h5><a href="toannv">ToanNV</a></h5>
-                                </div>
-                                <div className="post-content">
-                                    <p>aaa</p>
-                                </div>
-                                <div className="post-info">
-                                    <div className="col-md-2">
-                                        <a href="like">like</a>
-                                    </div>
-                                    <div className="col-md-2">
-                                        <a href="coment">comment</a>
-                                    </div>
-                                    <div className="col-md-2">
-                                        <a href="share">share</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 {/* right content */}
