@@ -1,0 +1,93 @@
+.post{
+
+}
+.form-post{
+    margin: 5px;
+    margin-bottom: 45px;
+    height: 30px;
+    width: 100%;
+}
+.post-left{
+    float: left;
+    width: 3%;
+    border-radius: 15px;
+}
+.avata-image{
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+}
+.post-right{
+    width: 93%;
+    float: right;
+    height: 50px;
+}
+.text-post{
+    height: 5px;
+
+}
+.bt-post{
+    border-radius: 25px;
+    float:right;
+    margin: 4px;
+}
+.media-post{
+    float: left;
+}
+.user-avata{
+    width: 40px;
+    height: 40px;
+    border-radius: 100px; 
+}
+.post-content{
+    margin-left: 5px;
+}
+.image-of-post{
+    width: 80%;
+}
+/* left content */
+.left-first{
+    height: 90px;
+    margin: 5px;
+    background-color: #55C500;
+}
+.avata-main{
+    width: 80px;
+    height: 75px;
+    margin-top: -40px;
+    margin-left: 10px;
+    border-radius: 100px;
+}
+.user-name{
+    margin-left: 3px;
+    float: right;
+}
+.nickname{
+    opacity: 0.6;
+}
+.block-2{
+    margin: 5px;
+}
+.sugget-status{
+    opacity: 0.6;
+    font-size: 11px;
+}
+/* right content */
+.follwing-left{
+    float: left;
+}
+.follwing-image{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    float:left;
+}
+.follwing-right{
+    margin-left: 10px;
+}
+.follwing-button{
+    background-color: white;
+    border-radius: 50px;
+    color: #235280;
+    border-color: #235280;
+}

@@ -1,7 +1,33 @@
 .header{
-    width: 500px;
-    margin: 0 auto;
+    width: 100%;
+    height: 50px;
+    margin: 0px auto;
+    float: left;
+    background-color: #55C500;
+    border-radius: 5px;
 }
 .block-nav{
     width: 150px;
+    height: 50px;
+    margin: 0 auto;
+    text-align: center;
+}
+.form-search{
+    margin: -7px;
+}
+.left-header{
+    float: left;
+}
+.right-header{
+    float: right;
+}
+.search-form{
+    border-radius: 20px;
+}
+.search-button{
+    border-radius: 20px;
+}
+.search-icon{
+    width: 20px;
+    height: 20px;
 }
