@@ -10,7 +10,6 @@ import avata_4 from '../styles/image/avata_3.jpg';
 import avata_5 from '../styles/image/avata_5.jpg';
 import gmail_icont from '../styles/image/gmail.png';
 
-
 export const postInput = (postText: any) =>
     <div className="post-insert" >
         <div className="user-image col-md-1">
@@ -24,13 +23,13 @@ export const postInput = (postText: any) =>
                 <p>{postText}</p>
             </div>
             <div className="post-info">
-                <div className="col-md-2">
+                <div className="col-md-4">
                     <a href="like">like</a>
                 </div>
-                <div className="col-md-2">
-                    <a href="coment">comment</a>
+                <div className="col-md-4">
+                    <a href="coment" >comment</a>
                 </div>
-                <div className="col-md-2">
+                <div className="col-md-4">
                     <a href="share">share</a>
                 </div>
             </div>
@@ -44,14 +43,14 @@ export const suggetTest = (follow: any, followStatus: any) =>
                 <img className="follwing-image" src={avata_3} />
             </div>
             <div className="follwing-right col-md-8">
-                <a href="love_cat">Nguyen Hai Minh Japan</a>
+                <a href="love_cat">Takimoto kusiya</a>
                 <p className="sugget-status">@MinhJanpan</p>
                 <button onClick={followStatus} type="submit" className="follwing-button">{follow}</button>
             </div>
         </div>
     </div>
 class Content extends React.Component<any, any> {
-    public textInput: string;
+    public textInput: string[] = [];
     // init state with constructor
     constructor(props: any) {
         super(props);
@@ -74,9 +73,13 @@ class Content extends React.Component<any, any> {
 
     // hidden post button
     public hiddenPostForm(): void {
-        this.textInput = this.state.textInput;
-        alert(this.textInput);
-        this.setState({ css: '.action-form-post{visibility: hidden;}', activePost: '.post-insert{visibility: visible;}', textInput: '' });
+        if(this.state.textInput !== null){
+            this.textInput.push(this.state.textInput);
+            alert(this.textInput);
+            this.setState({ css: '.action-form-post{visibility: hidden;}', activePost: '.post-insert{visibility: visible;}', textInput: '' });
+        }else{
+            alert('Enter anything!!');
+        }
     }
 
     // get post of text
@@ -85,17 +88,17 @@ class Content extends React.Component<any, any> {
     }
     // following
     public followStatus(): void {
-        switch(this.state.follow){
-            case 'follow':{
-                this.setState({follow: 'following'});
+        switch (this.state.follow) {
+            case 'follow': {
+                this.setState({ follow: 'following' });
                 break;
             }
-            case 'following':{
-                this.setState({follow: 'follow'});
+            case 'following': {
+                this.setState({ follow: 'follow' });
                 break;
             }
-            default:{
-                this.setState({follow: 'follow'});
+            default: {
+                this.setState({ follow: 'follow' });
                 break;
             }
 
@@ -191,7 +194,7 @@ class Content extends React.Component<any, any> {
                         <div className="timeline">
                             {/* post input */}
                             <style>{this.state.activePost}</style>
-                            {postInput(this.textInput)}
+                            {this.textInput.map(text => postInput(text))}
                             {/* post 1 */}
                             <div className="post" >
                                 <div className="user-image col-md-1">
@@ -205,13 +208,13 @@ class Content extends React.Component<any, any> {
                                         <p>Components are he main building block of a React application. A component represents a self-contained piece of UI. A component will usually display some data and be able handle some kind of user interaction.</p>
                                     </div>
                                     <div className="post-info">
-                                        <div className="col-md-2">
+                                        <div className="col-md-4">
                                             <a href="like">like</a>
                                         </div>
-                                        <div className="col-md-2">
+                                        <div className="col-md-4">
                                             <a href="coment" >comment</a>
                                         </div>
-                                        <div className="col-md-2">
+                                        <div className="col-md-4">
                                             <a href="share">share</a>
                                         </div>
                                     </div>
@@ -233,13 +236,13 @@ class Content extends React.Component<any, any> {
                                         <img className="image-of-post" src={post_image_1} alt="post image" />
                                     </div>
                                     <div className="post-info">
-                                        <div className="col-md-2">
+                                        <div className="col-md-4">
                                             <a href="like">like</a>
                                         </div>
-                                        <div className="col-md-2">
-                                            <a href="coment">comment</a>
+                                        <div className="col-md-4">
+                                            <a href="coment" >comment</a>
                                         </div>
-                                        <div className="col-md-2">
+                                        <div className="col-md-4">
                                             <a href="share">share</a>
                                         </div>
                                     </div>
@@ -261,13 +264,13 @@ class Content extends React.Component<any, any> {
                                         <img className="image-of-post" src={post_image_2} alt="post image" />
                                     </div>
                                     <div className="post-info">
-                                        <div className="col-md-2">
+                                        <div className="col-md-4">
                                             <a href="like">like</a>
                                         </div>
-                                        <div className="col-md-2">
-                                            <a href="coment">comment</a>
+                                        <div className="col-md-4">
+                                            <a href="coment" >comment</a>
                                         </div>
-                                        <div className="col-md-2">
+                                        <div className="col-md-4">
                                             <a href="share">share</a>
                                         </div>
                                     </div>
@@ -344,7 +347,6 @@ class Content extends React.Component<any, any> {
                             &nbsp;<a className="copyright-text" href="toannv">Job</a>
                             &nbsp;<a className="copyright-text" href="toannv">status</a>
                             &nbsp;<a className="copyright-text" href="toannv">developer</a>
-                            &nbsp;<a className="copyright-text" href="toannv">markerting</a>
                         </div>
                     </div>
                 </div>
