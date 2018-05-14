@@ -37,7 +37,7 @@ export const postInput = (postText: any) =>
         </div>
     </div>
 
-export const suggetTest = () =>
+export const suggetTest = (follow: any, followStatus: any) =>
     <div className="sugges">
         <div className="sugget-following row">
             <div className="follwing-left col-md-2">
@@ -46,7 +46,7 @@ export const suggetTest = () =>
             <div className="follwing-right col-md-8">
                 <a href="love_cat">Nguyen Hai Minh Japan</a>
                 <p className="sugget-status">@MinhJanpan</p>
-                <button type="submit" className="follwing-button">Follow</button>
+                <button onClick={followStatus} type="submit" className="follwing-button">{follow}</button>
             </div>
         </div>
     </div>
@@ -59,12 +59,12 @@ class Content extends React.Component<any, any> {
             css: '.action-form-post{visibility: hidden;}',
             activePost: '.post-insert{visibility: hidden;}',
             textInput: '',
-            follow: ''
+            follow: 'follow'
         };
         this.handleChange = this.handleChange.bind(this);
         this.hiddenPostForm = this.hiddenPostForm.bind(this);
         this.getPostTextInput = this.getPostTextInput.bind(this);
-
+        this.followStatus = this.followStatus.bind(this);
     }
 
     // show textarea post form
@@ -84,11 +84,21 @@ class Content extends React.Component<any, any> {
         this.setState({ textInput: e.currentTarget.value });
     }
     // following
-    public followUser(follow: any): string {
-        if (follow == null) {
-            return "follow";
-        } else {
-            return "following";
+    public followStatus(): void {
+        switch(this.state.follow){
+            case 'follow':{
+                this.setState({follow: 'following'});
+                break;
+            }
+            case 'following':{
+                this.setState({follow: 'follow'});
+                break;
+            }
+            default:{
+                this.setState({follow: 'follow'});
+                break;
+            }
+
         }
     }
     public render() {
@@ -102,7 +112,7 @@ class Content extends React.Component<any, any> {
                                 <div className="block-1 col-md-16">
                                     <div className="left-first">
                                         &nbsp;
-                                </div>
+                                    </div>
                                     <div className="user-status">
                                         <div className="user-info">
                                             <img className="avata-main col-md-12" src={avata_2} />
@@ -272,9 +282,9 @@ class Content extends React.Component<any, any> {
                         <div className="col-md-12 block-2">
                             <h5>Suggestion following for you. </h5>
                             <a href="reload">・Reload</a><a href="View all">・View all</a>
-                            {suggetTest()}
-
                             {/* sugget 1 */}
+                            {suggetTest(this.state.follow, this.followStatus)}
+                            {/* sugget 2 */}
                             <div className="sugges">
                                 <div className="sugget-following row">
                                     <div className="follwing-left col-md-2">
@@ -287,7 +297,7 @@ class Content extends React.Component<any, any> {
                                     </div>
                                 </div>
                             </div>
-                            {/* sugget 2 */}
+                            {/* sugget 3 */}
                             <div className="sugges">
                                 <div className="sugget-following row">
                                     <div className="follwing-left col-md-2">
@@ -300,7 +310,7 @@ class Content extends React.Component<any, any> {
                                     </div>
                                 </div>
                             </div>
-                            {/* sugget 3 */}
+                            {/* sugget 4 */}
                             <div className="sugges">
                                 <div className="sugget-following row">
                                     <div className="follwing-left col-md-2">
