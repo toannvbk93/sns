@@ -10,23 +10,8 @@ import avata_4 from '../styles/image/avata_3.jpg';
 import avata_5 from '../styles/image/avata_5.jpg';
 import gmail_icont from '../styles/image/gmail.png';
 
-interface Props {
-    postContent: string;
-    updateField: (name: string, value: any) => void;
-    getPost: () => void;
-}
 
-
-export const formPost = (props: Props) =>
-    <input
-        type="text"
-        className="form-control"
-        name="post"
-
-        placeholder="What are you doing?"
-    />
-
-export let postInput = () =>
+export const postInput = (postText: any) =>
     <div className="post-insert" >
         <div className="user-image col-md-1">
             <img src={avata_1} alt="toannv" className="user-avata" />
@@ -36,7 +21,7 @@ export let postInput = () =>
                 <h5><a href="toannv">ToanNV</a></h5>
             </div>
             <div className="post-content">
-                <p>aaa</p>
+                <p>{postText}</p>
             </div>
             <div className="post-info">
                 <div className="col-md-2">
@@ -51,25 +36,60 @@ export let postInput = () =>
             </div>
         </div>
     </div>
-export default class Content extends React.Component<any, any> {
+
+export const suggetTest = () =>
+    <div className="sugges">
+        <div className="sugget-following row">
+            <div className="follwing-left col-md-2">
+                <img className="follwing-image" src={avata_3} />
+            </div>
+            <div className="follwing-right col-md-8">
+                <a href="love_cat">Nguyen Hai Minh Japan</a>
+                <p className="sugget-status">@MinhJanpan</p>
+                <button type="submit" className="follwing-button">Follow</button>
+            </div>
+        </div>
+    </div>
+class Content extends React.Component<any, any> {
+    public textInput: string;
     // init state with constructor
-    constructor(props: Props) {
+    constructor(props: any) {
         super(props);
         this.state = {
-            postInput: formPost(props),
             css: '.action-form-post{visibility: hidden;}',
-            activePost: '.post-insert{visibility: hidden;}'
+            activePost: '.post-insert{visibility: hidden;}',
+            textInput: '',
+            follow: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.hiddenPostForm = this.hiddenPostForm.bind(this);
+        this.getPostTextInput = this.getPostTextInput.bind(this);
+
     }
+
     // show textarea post form
     public handleChange(): void {
         this.setState({ css: '.action-form-post{visibility: visible;}' });
     }
-    // hidden post texarea and show active post
+
+    // hidden post button
     public hiddenPostForm(): void {
-        this.setState({ css: '.action-form-post{visibility: hidden;}', activePost: '.post-insert{visibility: visible;}' });
+        this.textInput = this.state.textInput;
+        alert(this.textInput);
+        this.setState({ css: '.action-form-post{visibility: hidden;}', activePost: '.post-insert{visibility: visible;}', textInput: '' });
+    }
+
+    // get post of text
+    public getPostTextInput(e: React.FormEvent<HTMLInputElement>): void {
+        this.setState({ textInput: e.currentTarget.value });
+    }
+    // following
+    public followUser(follow: any): string {
+        if (follow == null) {
+            return "follow";
+        } else {
+            return "following";
+        }
     }
     public render() {
         return (
@@ -137,7 +157,14 @@ export default class Content extends React.Component<any, any> {
                             </div>
                             <div className="post-right" >
                                 <div onClick={this.handleChange} >
-                                    {this.state.postInput}
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        name="post"
+                                        placeholder="What are you doing?"
+                                        value={this.state.textInput}
+                                        onChange={this.getPostTextInput}
+                                    />
                                 </div>
                                 <div className="action-form-post">
                                     <style>{this.state.css}</style>
@@ -154,7 +181,7 @@ export default class Content extends React.Component<any, any> {
                         <div className="timeline">
                             {/* post input */}
                             <style>{this.state.activePost}</style>
-                            {postInput()}
+                            {postInput(this.textInput)}
                             {/* post 1 */}
                             <div className="post" >
                                 <div className="user-image col-md-1">
@@ -245,6 +272,9 @@ export default class Content extends React.Component<any, any> {
                         <div className="col-md-12 block-2">
                             <h5>Suggestion following for you. </h5>
                             <a href="reload">・Reload</a><a href="View all">・View all</a>
+                            {suggetTest()}
+
+                            {/* sugget 1 */}
                             <div className="sugges">
                                 <div className="sugget-following row">
                                     <div className="follwing-left col-md-2">
@@ -257,6 +287,7 @@ export default class Content extends React.Component<any, any> {
                                     </div>
                                 </div>
                             </div>
+                            {/* sugget 2 */}
                             <div className="sugges">
                                 <div className="sugget-following row">
                                     <div className="follwing-left col-md-2">
@@ -269,6 +300,7 @@ export default class Content extends React.Component<any, any> {
                                     </div>
                                 </div>
                             </div>
+                            {/* sugget 3 */}
                             <div className="sugges">
                                 <div className="sugget-following row">
                                     <div className="follwing-left col-md-2">
@@ -295,7 +327,7 @@ export default class Content extends React.Component<any, any> {
                         {/* copyright */}
                         <div className="search-friend col-md-12">
                             <a className="copyright-text" href="toannv">@ copyright toannv</a>
-                            &nbsp;<a className="copyright-text" href="toannv">contack us</a>
+                            &nbsp;<a className="copyright-text" href="toannv">contact us</a>
                             &nbsp;<a className="copyright-text" href="toannv">policy</a>
                             &nbsp;<a className="copyright-text" href="toannv">Center help</a>
                             &nbsp;<a className="copyright-text" href="toannv">application</a>
@@ -310,3 +342,4 @@ export default class Content extends React.Component<any, any> {
         );
     }
 }
+export default Content;

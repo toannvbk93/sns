@@ -35,3 +35,28 @@
     width: 20px;
     height: 20px;
 }
+/* user tab */
+.user-icont{
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    float: left;
+    margin: -5px;
+}
+/* responsive navbar */
+@media screen and (max-width: 600px) {
+    .header .search-container {
+      float: none;
+    }
+    .header navbar-brand, .header input[type=text], .topnav .search-container button {
+      float: none;
+      display: block;
+      text-align: left;
+      width: 100%;
+      margin: 0;
+      padding: 14px;
+    }
+    .header input[type=text] {
+      border: 1px solid #ccc;  
+    }
+  }
