@@ -10,6 +10,7 @@ import avata_4 from '../styles/image/avata_3.jpg';
 import avata_5 from '../styles/image/avata_5.jpg';
 import gmail_icont from '../styles/image/gmail.png';
 
+// post format
 export const postInput = (postText: any) =>
     <div className="post-insert" >
         <div className="user-image col-md-1">
@@ -36,6 +37,7 @@ export const postInput = (postText: any) =>
         </div>
     </div>
 
+// form sugget user
 export const suggetTest = (follow: any, followStatus: any) =>
     <div className="sugges">
         <div className="sugget-following row">
@@ -49,7 +51,10 @@ export const suggetTest = (follow: any, followStatus: any) =>
             </div>
         </div>
     </div>
+
+// main processing render interface
 class Content extends React.Component<any, any> {
+    // array post content
     public textInput: string[] = [];
     // init state with constructor
     constructor(props: any) {
@@ -86,7 +91,7 @@ class Content extends React.Component<any, any> {
     public getPostTextInput(e: React.FormEvent<HTMLInputElement>): void {
         this.setState({ textInput: e.currentTarget.value });
     }
-    // following
+    // following status
     public followStatus(): void {
         switch (this.state.follow) {
             case 'follow': {
