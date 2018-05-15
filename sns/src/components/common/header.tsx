@@ -23,7 +23,6 @@ function Header() {
                 <div className="block-nav navbar-brand"><Link to="/user"><div><img className="user-icont" src={user_icon} /></div></Link></div>
             </div>
         </div>
-
     );
 }
 
