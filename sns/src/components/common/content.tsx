@@ -10,6 +10,8 @@ import avata_4 from '../styles/image/avata_3.jpg';
 import avata_5 from '../styles/image/avata_5.jpg';
 import gmail_icont from '../styles/image/gmail.png';
 
+
+
 // post format
 export const postInput = (postText: any) =>
     <div className="post-insert" >
@@ -37,6 +39,33 @@ export const postInput = (postText: any) =>
         </div>
     </div>
 
+// tslint:disable-next-line:variable-name
+export const post = (username: any, post_content: any, like: any, share: any) =>
+    <div>
+        <div className="user-image col-md-1">
+            <img src={avata_1} alt="toannv" className="user-avata" />
+        </div>
+        <div className="post-content col-md-10">
+            <div className="username">
+                <h5><a href="toannv">{username}</a></h5>
+            </div>
+            <div className="post-content">
+                <p>{post_content}</p>
+            </div>
+            <div className="post-info">
+                <div className="col-md-4">
+                    <a href="like">{like} like</a>
+                </div>
+                <div className="col-md-4">
+                    <a href="coment" >comment</a>
+                </div>
+                <div className="col-md-4">
+                    <a href="share">share {share}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 // form sugget user
 export const suggetTest = (follow: any, followStatus: any) =>
     <div className="sugges">
@@ -56,6 +85,7 @@ export const suggetTest = (follow: any, followStatus: any) =>
 class Content extends React.Component<any, any> {
     // array post content
     public textInput: string[] = [];
+    public user: any[] = [];
     // init state with constructor
     constructor(props: any) {
         super(props);
@@ -63,12 +93,22 @@ class Content extends React.Component<any, any> {
             css: '.action-form-post{visibility: hidden;}',
             activePost: '.post-insert{visibility: hidden;}',
             textInput: '',
-            follow: 'follow'
+            follow: 'follow',
+            user: []
         };
         this.handleChange = this.handleChange.bind(this);
         this.hiddenPostForm = this.hiddenPostForm.bind(this);
         this.getPostTextInput = this.getPostTextInput.bind(this);
         this.followStatus = this.followStatus.bind(this);
+        this.fetchData = this.fetchData.bind(this);
+    }
+    public setUser(user: any): void {
+        this.user = user;
+    }
+    public fetchData(): void {
+        fetch('http://localhost:3001/')
+            .then(response => response.json())
+            .then(data => this.setState({ user: data }));
     }
 
     // show textarea post form
@@ -78,11 +118,16 @@ class Content extends React.Component<any, any> {
 
     // hidden post button
     public hiddenPostForm(): void {
-        if(this.state.textInput !== null){
+        if (this.state.textInput) {
             this.textInput.push(this.state.textInput);
+            fetch('http://localhost:3001/', {
+                method: 'post',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 'username': 'Toannv', 'post_content': this.state.textInput, 'like': '0', 'share': '0' })
+            });
             alert(this.textInput);
             this.setState({ css: '.action-form-post{visibility: hidden;}', activePost: '.post-insert{visibility: visible;}', textInput: '' });
-        }else{
+        } else {
             alert('Enter anything!!');
         }
     }
@@ -110,6 +155,7 @@ class Content extends React.Component<any, any> {
         }
     }
     public render() {
+        this.user = this.state.user;
         return (
             <div className="main-content">
                 <div className="content">
@@ -196,10 +242,16 @@ class Content extends React.Component<any, any> {
                             </div>
                         </div>
                         {/* all post show in here */}
-                        <div className="timeline">
+                        <div className="timeline" onLoad={this.fetchData}>
                             {/* post input */}
                             <style>{this.state.activePost}</style>
                             {this.textInput.map(text => postInput(text))}
+                            {/* post load from database */}
+                            {this.user.map(u =>
+                                <div key={u.id}>
+                                    {post(u.username, u.post_content, u.like, u.share)}
+                                </div>
+                            )}
                             {/* post 1 */}
                             <div className="post" >
                                 <div className="user-image col-md-1">
